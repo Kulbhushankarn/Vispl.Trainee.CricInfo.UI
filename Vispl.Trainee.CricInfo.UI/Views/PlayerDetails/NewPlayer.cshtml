@@ -1,0 +1,99 @@
+﻿@model Vispl.Trainee.CricInfo.VO.Cls_Player_VO
+@using Syncfusion.EJ2
+@using Syncfusion.EJ2.Inputs
+@{Layout = "~/Views/Shared/_Layout.cshtml";}
+@{
+    ViewBag.Title = "NewPlayer";
+}
+<script src="~/Scripts/nationalityAPI.js"></script>
+
+@using (Html.BeginForm("NewPlayer", "PlayerDetails", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Enter Details</h4>
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().TextBox("Name").Placeholder("Enter Player Name").Width("40%").ShowClearButton().Render()
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DateTimePicker("dob").Width("40%").Format("dd-MM-yyyy").Placeholder("Select Date Of Birth").Render()
+                @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DropDownList("nationality").AllowFiltering().Width("40%").Placeholder("Select Your Nationality").Render()
+                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DropDownList("Role").DataSource(Enum.GetNames(typeof(Vispl.Trainee.CricInfo.VO.PlayerType)).ToList()).Width("40%").Placeholder("Select Player type").Render()
+                @Html.ValidationMessageFor(model => model.Role, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BattingStyle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DropDownList("battingStyle").DataSource(Enum.GetNames(typeof(Vispl.Trainee.CricInfo.VO.BattingStyle)).ToList()).Width("40%").Placeholder("Select Batting style").Render()
+                @Html.ValidationMessageFor(model => model.BattingStyle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BowlingStyle, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DropDownList("bowlingStyle").DataSource(Enum.GetNames(typeof(Vispl.Trainee.CricInfo.VO.BowlingStyle)).ToList()).Width("40%").Placeholder("Select Bowling style").Render()
+                @Html.ValidationMessageFor(model => model.BowlingStyle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TeamPlayingFor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EJS().DropDownList("teamPlayingFor").Width("40%").Placeholder("Select team Playing For").Render()
+                @Html.ValidationMessageFor(model => model.BowlingStyle, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isAllRounder, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EJS().CheckBox("isAllRounder").CssClass("e-switch").Render()
+
+                    @Html.ValidationMessageFor(model => model.isAllRounder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

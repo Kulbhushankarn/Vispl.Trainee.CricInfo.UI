@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Vispl.Trainee.CricInfo.VO.Cls_Player_VO>
+
+@{
+    ViewBag.Title = "DisplayPlayersDataInGrid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DisplayPlayersDataInGrid</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id="Grid"></div>
+
+<script type="text/javascript">
+    $(function () {
+        // Initialize the Syncfusion Grid
+        var grid = new ej.grids.Grid({
+            dataSource: @Html.Raw(Json.Encode(Model)),
+            allowPaging: true,
+            allowSorting: true,
+            allowFiltering: true,
+            pageSettings: { pageSize: 10 },
+            columns: [
+                { field: 'Name', headerText: 'Name' },
+                { field: 'DOB', headerText: 'DOB', format: { type: 'date', format: 'yMd' } },
+                { field: 'Nationality', headerText: 'Nationality' },
+                { field: 'BattingStyle', headerText: 'Batting Style' },
+                { field: 'BowlingStyle', headerText: 'Bowling Style' },
+                { field: 'isAllRounder', headerText: 'Is All Rounder' },
+                { field: 'PicURL', headerText: 'Pic URL' },
+                { field: 'TeamPlayingFor', headerText: 'Team Playing For' },
+                {
+                    headerText: 'Actions', commands: [
+                        { type: 'Edit', buttonOption: { content: 'Edit', cssClass: 'e-flat' } },
+                        { type: 'Delete', buttonOption: { content: 'Delete', cssClass: 'e-flat' } },
+                        { type: 'Details', buttonOption: { content: 'Details', cssClass: 'e-flat' } }
+                    ]
+                }
+            ]
+        });
+
+        // Render the grid
+        grid.appendTo('#Grid');
+    });
+</script>
