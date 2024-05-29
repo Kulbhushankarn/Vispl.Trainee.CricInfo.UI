@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Vispl.Trainee.CricInfo.DL
 {
-    public class Cls_Player_DL
+    public class Cls_Player_DL : ICls_Player_DL
     {
         /// <summary>
         /// Represents the connection String

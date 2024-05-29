@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Vispl.Trainee.CricInfo.BM
 {
-    public class Cls_Player_BM
+    public class Cls_Player_BM : ICls_Player_BM
     {
         /// <summary>
         /// DL layer object responsible for data operations related to Player entity

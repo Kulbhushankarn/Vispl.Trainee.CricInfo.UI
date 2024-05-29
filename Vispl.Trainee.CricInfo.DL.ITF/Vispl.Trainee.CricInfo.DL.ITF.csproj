@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B7BC01F5-A3C4-4137-B38F-4FE394FAB35F}</ProjectGuid>
+    <ProjectGuid>{9D0D1A6A-6842-46F9-BC6B-669E1BF76CD9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Vispl.Trainee.CricInfo.BM</RootNamespace>
-    <AssemblyName>Vispl.Trainee.CricInfo.BM</AssemblyName>
+    <RootNamespace>Vispl.Trainee.CricInfo.DL.ITF</RootNamespace>
+    <AssemblyName>Vispl.Trainee.CricInfo.DL.ITF</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -45,19 +45,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Vispl.Trainee.CricInfo.BM.ITF">
-      <HintPath>..\Vispl.Trainee.CricInfo.BM.ITF\bin\Debug\Vispl.Trainee.CricInfo.BM.ITF.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cls_Player_BM.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Vispl.Trainee.CricInfo.DL\Vispl.Trainee.CricInfo.DL.csproj">
-      <Project>{2bb5f424-c320-446e-bfd0-7161aab9eead}</Project>
-      <Name>Vispl.Trainee.CricInfo.DL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Vispl.Trainee.CricInfo.VO\Vispl.Trainee.CricInfo.VO.csproj">
       <Project>{4f1bb8b7-ac1f-4f57-8fd8-c30fbabbe2bd}</Project>
       <Name>Vispl.Trainee.CricInfo.VO</Name>

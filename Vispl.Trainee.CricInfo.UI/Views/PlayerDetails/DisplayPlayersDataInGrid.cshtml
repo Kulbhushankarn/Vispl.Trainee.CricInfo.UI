@@ -10,38 +10,68 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nationality)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BattingStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BowlingStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isAllRounder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PicURL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamPlayingFor)
+        </th>
+        <th></th>
+    </tr>
 
-<div id="Grid"></div>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BattingStyle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BowlingStyle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.isAllRounder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PicURL)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamPlayingFor)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PlayerID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PlayerID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PlayerID })
+            </td>
+        </tr>
+    }
 
-<script type="text/javascript">
-    $(function () {
-        // Initialize the Syncfusion Grid
-        var grid = new ej.grids.Grid({
-            dataSource: @Html.Raw(Json.Encode(Model)),
-            allowPaging: true,
-            allowSorting: true,
-            allowFiltering: true,
-            pageSettings: { pageSize: 10 },
-            columns: [
-                { field: 'Name', headerText: 'Name' },
-                { field: 'DOB', headerText: 'DOB', format: { type: 'date', format: 'yMd' } },
-                { field: 'Nationality', headerText: 'Nationality' },
-                { field: 'BattingStyle', headerText: 'Batting Style' },
-                { field: 'BowlingStyle', headerText: 'Bowling Style' },
-                { field: 'isAllRounder', headerText: 'Is All Rounder' },
-                { field: 'PicURL', headerText: 'Pic URL' },
-                { field: 'TeamPlayingFor', headerText: 'Team Playing For' },
-                {
-                    headerText: 'Actions', commands: [
-                        { type: 'Edit', buttonOption: { content: 'Edit', cssClass: 'e-flat' } },
-                        { type: 'Delete', buttonOption: { content: 'Delete', cssClass: 'e-flat' } },
-                        { type: 'Details', buttonOption: { content: 'Details', cssClass: 'e-flat' } }
-                    ]
-                }
-            ]
-        });
-
-        // Render the grid
-        grid.appendTo('#Grid');
-    });
-</script>
+</table>

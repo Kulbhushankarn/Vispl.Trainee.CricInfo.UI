@@ -12,7 +12,7 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
 {
     public class PlayerDetailsController : Controller
     {
-        private readonly Cls_Player_BM _playerBM;
+        private ICls_Player_BM _playerBM;
 
         public PlayerDetailsController()
         {
