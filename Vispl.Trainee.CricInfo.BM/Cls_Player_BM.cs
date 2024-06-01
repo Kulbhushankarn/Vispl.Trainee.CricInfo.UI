@@ -39,6 +39,7 @@ namespace Vispl.Trainee.CricInfo.BM
             }
         }
 
+
         public List<Cls_Player_VO> DisplayAllPlayers()
         {
             return _dl.GetAllPlayers();

@@ -13,6 +13,12 @@ namespace Vispl.Trainee.CricInfo.VO
         public long PlayerID { get; set; }
 
         /// <summary>
+        /// Gets or sets the jersey number of the player.
+        /// </summary>
+        [Display(Name = "Jersey Number")]
+        public int JerseyNo { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of the player.
         /// </summary>
         [Display(Name = "Player Name")]
@@ -23,7 +29,43 @@ namespace Vispl.Trainee.CricInfo.VO
         /// </summary>
         [Display(Name = "Date of Birth")]
         [DataType(DataType.Date)]
-        public DateTime DOB { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
+        /// <summary>
+        /// Gets or sets the age of the player.
+        /// </summary>
+        [Display(Name = "Age")]
+        public int Age
+        {
+            get
+            {
+                return DateTime.Now.Year - DateOfBirth.Year;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the birth place of the player.
+        /// </summary>
+        [Display(Name = "Birth Place")]
+        public string BirthPlace { get; set; }
+
+        /// <summary>
+        /// Gets or sets the player type.
+        /// </summary>
+        [Display(Name = "Player Type")]
+        public string PlayerType { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the player is a captain.
+        /// </summary>
+        [Display(Name = "Is Captain")]
+        public bool IsCaptain { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the player is a substitute.
+        /// </summary>
+        [Display(Name = "Is Substitute")]
+        public bool IsSubstitute { get; set; }
 
         /// <summary>
         /// Gets or sets the nationality of the player.
@@ -32,109 +74,78 @@ namespace Vispl.Trainee.CricInfo.VO
         public string Nationality { get; set; }
 
         /// <summary>
-        /// Gets or sets the role of the player.
+        /// Gets or sets the team the player is currently playing for.
         /// </summary>
-        [Display(Name = "Player Role")]
-        public PlayerType Role { get; set; }
+        [Display(Name = "Team")]
+        public string Team { get; set; }
 
         /// <summary>
-        /// Gets or sets the batting style of the player.
+        /// Gets or sets the number of matches played by the player.
         /// </summary>
-        [Display(Name = "Batting Style")]
-        public string BattingStyle { get; set; }
+        [Display(Name = "Matches Played")]
+        public int MatchesPlayed { get; set; }
 
         /// <summary>
-        /// Gets or sets the bowling style of the player.
+        /// Gets or sets the number of runs scored by the player.
         /// </summary>
-        [Display(Name = "Bowling Style")]
-        public string BowlingStyle { get; set; }
+        [Display(Name = "Runs Scored")]
+        public int RunsScored { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the player is an all-rounder.
+        /// Gets or sets the number of wickets taken by the player.
         /// </summary>
-        [Display(Name = "Is All-Rounder")]
-        public bool isAllRounder { get; set; }
+        [Display(Name = "Wickets Taken")]
+        public int WicketsTaken { get; set; }
+
+        /// <summary>
+        /// Gets or sets the batting average of the player.
+        /// </summary>
+        [Display(Name = "Batting Average")]
+        public double BattingAverage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bowling average of the player.
+        /// </summary>
+        [Display(Name = "Bowling Average")]
+        public double BowlingAverage { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of centuries scored by the player.
+        /// </summary>
+        [Display(Name = "Centuries")]
+        public int Centuries { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of half-centuries scored by the player.
+        /// </summary>
+        [Display(Name = "Half-Centuries")]
+        public int HalfCenturies { get; set; }
+
+        /// <summary>
+        /// Gets or sets the debut date of the player.
+        /// </summary>
+        [Display(Name = "Debut Date")]
+        [DataType(DataType.Date)]
+        public DateTime DebutDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the ICC ranking of the player.
+        /// </summary>
+        [Display(Name = "ICC Ranking")]
+        public int ICCRanking { get; set; }
 
         /// <summary>
         /// Gets or sets the URL of the player's profile picture.
         /// </summary>
         [Display(Name = "Profile Picture URL")]
-        public string PicURL { get; set; }
-
-        /// <summary>
-        /// Gets or sets the team the player is currently playing for.
-        /// </summary>
-        [Display(Name = "Team Playing For")]
-        public string TeamPlayingFor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the batting statistics of the player.
-        /// </summary>
-        public Cls_BattingStats_VO BattingStatistics { get; set; }
-
-        /// <summary>
-        /// Gets or sets the bowling statistics of the player.
-        /// </summary>
-        public Cls_BowlingStats_VO BowlingStatistics { get; set; }
+        public string Picture { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cls_Player_VO"/> class.
         /// </summary>
         public Cls_Player_VO()
         {
-            BattingStatistics = new Cls_BattingStats_VO();
-            if (BowlingStyle != null)
-            {
-                BowlingStatistics = new Cls_BowlingStats_VO();
-            }
+            // Initialize other statistics if necessary
         }
-
-    }
-
-    public enum Nationality
-    {
-        India,
-        England,
-        SouthAfrica,
-        Australia,
-        Bangladesh,
-        Pakistan,
-    }
-
-    /// <summary>
-    /// Represents the role of a cricket player.
-    /// </summary>
-    public enum PlayerType
-    {
-        ordinaryPlayer,
-        wicketKeeper,
-        Captain,
-        ViceCaptain,
-    }
-
-    /// <summary>
-    /// Represents the batting style of a cricket player.
-    /// </summary>
-    public enum BattingStyle
-    {
-        RightHanded,
-        LeftHanded,
-        Aggressive,
-        Defensive,
-    }
-
-    /// <summary>
-    /// Represents the bowling style of a cricket player.
-    /// </summary>
-    public enum BowlingStyle
-    {
-        Fast,
-        MediumPace,
-        Spin,
-        LeftArmFast,
-        LeftArmMediumPace,
-        LeftArmSpin,
-        LegSpin,
-        OffSpin
     }
 }

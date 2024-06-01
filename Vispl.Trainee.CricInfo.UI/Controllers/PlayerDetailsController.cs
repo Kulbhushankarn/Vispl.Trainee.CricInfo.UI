@@ -25,20 +25,31 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
             Cls_Player_VO player = new Cls_Player_VO();
             return View(player);
         }
+        
         [HttpPost]
-        public ActionResult NewPlayer(Cls_Player_VO player, FormCollection frm)
+        public ActionResult NewPlayer(Cls_Player_VO player)
         {
             try
             {
-                _playerBM.AddNewPlayer(player);
+                if (_playerBM.AddNewPlayer(player))
+                {
+                    return RedirectToAction("DisplayPlayersDataInGrid");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Failed to add player.");
+                }
             }
             catch (SqlException ex)
             {
-                return View("Error", ex);
+                ModelState.AddModelError("", "An error occurred while adding the player.");
+                // Log the exception or handle it appropriately
             }
 
-            return View();
+            // If execution reaches here, there was an error, so return to the same view with model errors
+            return View(player);
         }
+
 
         public ActionResult DisplayPlayersDataInGrid()
         {

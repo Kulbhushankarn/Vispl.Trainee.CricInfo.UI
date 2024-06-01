@@ -5,73 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DisplayPlayersDataInGrid</h2>
+<h2>Players List</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button id="createNewButton" class="e-btn e-flat e-primary">Create New</button>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DOB)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nationality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BattingStyle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BowlingStyle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.isAllRounder)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PicURL)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TeamPlayingFor)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+@(Html.EJS().Grid<Vispl.Trainee.CricInfo.VO.Cls_Player_VO>("GridOverview")
+    .DataSource(Model)
+    .AllowPaging()
+    .AllowFiltering()
+    .Columns(col =>
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DOB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nationality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BattingStyle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BowlingStyle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.isAllRounder)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PicURL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamPlayingFor)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PlayerID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PlayerID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PlayerID })
-            </td>
-        </tr>
-    }
+        col.Type("checkbox").HeaderText("").Field("").Width("60").AllowFiltering(false).AllowSorting(false).Add();
+        col.Field("JerseyNo").HeaderText("Jersey No").Width("100").Add();
+        col.Field("Name").HeaderText("Name").Width("150").Add();
+        col.Field("DateOfBirth").HeaderText("Date Of Birth").Width("150").Add();
+        col.Field("Age").HeaderText("Age").Width("100").Add();
+        col.Field("BirthPlace").HeaderText("Birth Place").Width("150").Add();
+        col.Field("PlayerType").HeaderText("Player Type").Width("150").Add();
+        col.Field("IsCaptain").HeaderText("Is Captain").Width("100").Add();
+        col.Field("IsSubstitute").HeaderText("Is Substitute").Width("100").Add();
+        col.Field("Nationality").HeaderText("Nationality").Width("100").Add();
+        col.Field("MatchesPlayed").HeaderText("Matches Played").Width("100").Add();
+        col.Field("RunsScored").HeaderText("Runs Scored").Width("100").Add();
+        col.Field("WicketsTaken").HeaderText("Wicket Taken").Width("100").Add();
+        col.Field("BattingAverage").HeaderText("Batting Average").Width("100").Add();
+        col.Field("BowlingAverage").HeaderText("Bowling Average").Width("100").Add();
+        col.Field("Centuries").HeaderText("Centuries").Width("100").Add();
+        col.Field("HalfCenturies").HeaderText("Half-Centuries").Width("100").Add();
+        col.Field("DebutDate").HeaderText("Debut Date").Width("100").Add();
+        col.Field("ICCRanking").HeaderText("ICC Ranking").Width("100").Add();
+        col.Field("BowlingAverage").HeaderText("Bowling Average").Width("100").Add();
+        col.Field("Team").HeaderText("Team").Width("100").Add();
+        col.Field("PlayerID").HeaderText("Actions").Template("<a href='Edit/{{:PlayerID}}'>Edit</a> | <a href='Details/{{:PlayerID}}'>Details</a> | <a href='Delete/{{:PlayerID}}'>Delete</a>").Width("200").Add();
+    })
+    .Render()
+)
 
-</table>
+<script>
+    document.getElementById("createNewButton").addEventListener("click", function () {
+        window.location.href = '@Url.Action("NewPlayer", "PlayerDetails")';
+    });
+</script>

@@ -1,0 +1,90 @@
+﻿/* PlayerForm.css */
+.form-horizontal {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+    .form-horizontal h4 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+
+    .form-horizontal .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-horizontal .control-label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-horizontal .col-md-10 {
+        display: flex;
+        align-items: center;
+    }
+
+        .form-horizontal .col-md-10 .e-control {
+            flex: 1;
+        }
+
+    .form-horizontal .e-input,
+    .form-horizontal .e-checkbox,
+    .form-horizontal .e-datetimepicker,
+    .form-horizontal .e-numerictextbox {
+        width: 100% !important;
+        max-width: 400px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+        .form-horizontal .e-input::placeholder,
+        .form-horizontal .e-numerictextbox::placeholder,
+        .form-horizontal .e-datetimepicker::placeholder {
+            color: #aaa;
+        }
+
+    .form-horizontal .btn-default {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-horizontal .btn-default:hover {
+            background-color: #0056b3;
+        }
+
+    .form-horizontal .text-danger {
+        color: #e74c3c;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .form-horizontal .col-md-offset-2 {
+        margin-left: 16.66666667%;
+    }
+
+    .form-horizontal .action-link {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .form-horizontal .action-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .form-horizontal .action-link a:hover {
+                text-decoration: underline;
+            }
