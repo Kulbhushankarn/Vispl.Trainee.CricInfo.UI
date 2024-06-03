@@ -48,8 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cls_BattingStats_VO.cs" />
-    <Compile Include="Cls_BowlingStats_VO.cs" />
+    <Compile Include="Cls_Login_VO.cs" />
     <Compile Include="Cls_MatchSchedule_VO.cs" />
     <Compile Include="Cls_Player_VO.cs" />
     <Compile Include="Cls_TeamPlayer_VO.cs" />

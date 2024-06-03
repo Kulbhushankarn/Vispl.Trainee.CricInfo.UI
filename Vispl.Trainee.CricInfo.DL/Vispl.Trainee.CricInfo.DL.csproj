@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cls_CreateTeam_DL.cs" />
     <Compile Include="Cls_Player_DL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

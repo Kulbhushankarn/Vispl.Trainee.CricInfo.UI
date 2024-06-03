@@ -5,75 +5,85 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Team Details</h2>
+<h2>Team Create</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("TeamDetails", "TeamDetails", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+<div class="form-horizontal">
+    <hr />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TeamName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TeamShortName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.TeamShortName, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TeamShortName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("TeamPlayers", "Team Players", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @(Html.EJS().MultiSelect("TeamPlayers")
-                    .Placeholder("Select players")
-                    .DataSource((List<string>)ViewBag.Players)
-                    .Render())
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("TeamCaptain", "Team Captain", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @(Html.EJS().DropDownList("TeamCaptain")
-                    .Placeholder("Select captain")
-                    .DataSource((List<string>)ViewBag.Players)
-                    .Render())
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("TeamWicketKeeper", "Team Wicket Keeper", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @(Html.EJS().DropDownList("TeamWicketKeeper")
-                    .Placeholder("Select wicketkeeper")
-                    .DataSource((List<string>)ViewBag.Players)
-                    .Render())
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("TeamViceCaptain", "Team Vice Captain", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @(Html.EJS().DropDownList("TeamViceCaptain")
-                    .Placeholder("Select vice-captain")
-                    .DataSource((List<string>)ViewBag.Players)
-                    .Render())
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeamName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TeamName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TeamName, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeamShortName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.TeamShortName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TeamShortName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("TeamPlayers", "Team Players", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.EJS().MultiSelectFor(model => model.TeamPlayer)
+            .DataSource((IEnumerable<string>)ViewBag.Players)
+            .Placeholder("Select team players")
+            .Render())
+            @Html.ValidationMessageFor(model => model.TeamPlayer, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeamCaptain, "Team Captain", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.EJS().DropDownListFor(model => model.TeamCaptain)
+                    .DataSource((IEnumerable<string>)ViewBag.Players)
+                    .Width("100%")
+                    .Placeholder("Select captain")
+                    .Render())
+            @Html.ValidationMessageFor(model => model.TeamCaptain, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeamWicketKeeper, "Team Wicket Keeper", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.EJS().DropDownListFor(model => model.TeamWicketKeeper)
+                    .DataSource((IEnumerable<string>)ViewBag.Players)
+                    .Width("100%")
+                    .Placeholder("Select wicketkeeper")
+                    .Render())
+            @Html.ValidationMessageFor(model => model.TeamWicketKeeper, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.TeamViceCaptain, "Team Vice Captain", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @(Html.EJS().DropDownListFor(model => model.TeamViceCaptain)
+                    .DataSource((IEnumerable<string>)ViewBag.Players)
+                    .Width("100%")
+                    .Placeholder("Select vice-captain")
+                    .Render())
+            @Html.ValidationMessageFor(model => model.TeamViceCaptain, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }

@@ -13,5 +13,10 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
         {
             return View();
         }
+
+        public ActionResult LoginDashboard()
+        {
+            return View();
+        }
     }
 }

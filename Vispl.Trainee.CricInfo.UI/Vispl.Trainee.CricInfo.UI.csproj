@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MatchScheduleController.cs" />
     <Compile Include="Controllers\PlayerDetailsController.cs" />
     <Compile Include="Controllers\TeamDetailsController.cs" />
@@ -157,6 +158,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\EJ2\fluent.css" />
+    <Content Include="Content\FormCss\DashboardStyles.css" />
+    <Content Include="Content\FormCss\LoginSheet1.css" />
     <Content Include="Content\FormCss\PlayerForm.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -200,6 +203,9 @@
     <Content Include="Views\MatchSchedule\MatchSchedule.cshtml" />
     <Content Include="VISPLTrainee.snk" />
     <Content Include="Views\_DateTimeWithZone.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Dashboard\LoginDashboard.cshtml" />
+    <Content Include="Views\TeamDetails\DisplayTeamDetailsInGrid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

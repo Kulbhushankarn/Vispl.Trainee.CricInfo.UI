@@ -1,8 +1,9 @@
 ﻿@{
-    ViewBag.Title = "DashboardLayout";
+    ViewBag.Title = "LoginDashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<p>@Html.ActionLink("Logout", "Logout", "Account")</p>
 <div id="ControlRegion">
     <div class="control-section">
         <div>
@@ -24,12 +25,12 @@
                 </div>
                 <div id="four" class="e-panel" data-row="2" data-col="1" data-sizeX="1" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">3</div>
+                        <div class="text-align"><a href='~/TeamDetails/TeamDetails'>Create Teams</div>
                     </div>
                 </div>
                 <div id="five" class="e-panel" data-row="2" data-col="2" data-sizeX="2" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">4</div>
+                        <div class="text-align"><a href='~/PlayerDetails/NewPlayer'>Create Players</div>
                     </div>
                 </div>
                 <div id="six" class="e-panel" data-row="0" data-col="3" data-sizeX="1" data-sizeY="1">
@@ -67,3 +68,4 @@
         }
     </style>
 </div>
+

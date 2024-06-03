@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Vispl.Trainee.CricInfo.VO.Cls_TeamPlayer_VO>
+
+@{ 
+    ViewBag.Title = "DisplayTeamDetailsInGrid";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Team List</h2>
+
+<p>
+    <button id="createNewButton" class="e-btn e-flat e-primary">Create New</button>
+</p>
+
+@(Html.EJS().Grid<Vispl.Trainee.CricInfo.VO.Cls_TeamPlayer_VO>("GridOverview")
+        .DataSource(Model)
+        .AllowPaging()
+        .AllowFiltering()
+        .Columns(col =>
+        {
+            col.Type("checkbox").HeaderText("").Field("").Width("60").AllowFiltering(false).AllowSorting(false).Add();
+            col.Field("TeamName").HeaderText("Team Name").Width("100").Add();
+            col.Field("TeamShortName").HeaderText("Team Short Name").Width("100").Add();
+            col.Field("TeamPlayer").HeaderText("Team Players").Width("100").Add();
+            col.Field("TeamCaptain").HeaderText("Team Captain").Width("100").Add();
+            col.Field("TeamWicketKeeper").HeaderText("Team Wicket Keeper").Width("100").Add();
+            col.Field("TeamViceCaptain").HeaderText("Team Vice Captain").Width("100").Add();
+        })
+        .Render()
+   )
+
+<script>
+    document.getElementById("createNewButton").addEventListener("click", function () {
+        window.location.href = '@Url.Action("TeamDetails", "TeamDetails")';
+    });
+</script>
