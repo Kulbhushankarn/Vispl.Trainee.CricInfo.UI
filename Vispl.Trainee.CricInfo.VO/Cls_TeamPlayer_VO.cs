@@ -11,10 +11,10 @@ namespace Vispl.Trainee.CricInfo.VO
         {
             public string TeamName { get; set; }
             public string TeamShortName { get; set; }
-            public List<long> TeamPlayer { get; set; }
-            public long TeamCaptain { get; set; }
-            public long TeamWicketKeeper { get; set; }
-            public long TeamViceCaptain { get; set; }
+            public List<string> TeamPlayer { get; set; }
+            public string TeamCaptain { get; set; }
+            public string TeamWicketKeeper { get; set; }
+            public string TeamViceCaptain { get; set; }
 
         }
 }

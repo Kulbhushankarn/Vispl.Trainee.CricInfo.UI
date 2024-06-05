@@ -66,10 +66,10 @@ namespace Vispl.Trainee.CricInfo.DL
                             {
                                 TeamName = reader["TeamName"].ToString(),
                                 TeamShortName = reader["TeamShortName"].ToString(),
-                                TeamPlayer = reader["TeamPlayer"].ToString().Split(',').Select(long.Parse).ToList(), // Convert comma-separated string to List<long>
-                                TeamCaptain = (long)reader["TeamCaptain"],
-                                TeamWicketKeeper = (long)reader["TeamWicketKeeper"],
-                                TeamViceCaptain = (long)reader["TeamViceCaptain"]
+                                TeamPlayer = reader["TeamPlayer"].ToString().Split(',').ToList(), // Convert comma-separated string to List<long>
+                                TeamCaptain = reader["TeamCaptain"].ToString(),
+                                TeamWicketKeeper = reader["TeamWicketKeeper"].ToString(),
+                                TeamViceCaptain = reader["TeamViceCaptain"].ToString()
                             };
                             teams.Add(team);
                         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Vispl.Trainee.CricInfo.VO;
 
@@ -13,7 +12,12 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
         [HttpGet]
         public ActionResult MatchSchedule()
         {
-            return View(new Cls_MatchSchedule_VO());
+            var model = new Cls_MatchSchedule_VO
+            {
+                MatchDate = DateTime.Now,
+                TimeZone = TimeZoneInfo.Local.Id
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -29,6 +33,11 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
         }
 
         public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult DisplayMatchDataInGrid()
         {
             return View();
         }

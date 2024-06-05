@@ -1,0 +1,23 @@
+﻿@using Syncfusion.EJ2.Calendars
+@using Syncfusion.EJ2.DropDowns
+@model Vispl.Trainee.CricInfo.VO.Cls_MatchSchedule_VO
+
+<div style="display:flex">
+    <div class="form-group">
+        <label for="DateTime">Date and Time:</label>
+        @{
+            @Html.EJS().DateTimePicker("DateTimePicker").HtmlAttributes(new Dictionary<string, object> { { "class", "form-control" }, { "id", "DateTime" } }).Render();
+        }
+    </div>
+
+    <div class="form-group">
+        <label for="TimeZone">Time Zone:</label>
+        @{
+            var timeZones = TimeZoneInfo.GetSystemTimeZones()
+                .Select(tz => new { Value = tz.Id, Text = tz.DisplayName })
+                .ToList();
+
+            @Html.EJS().DropDownList("TimeZoneDropDown").HtmlAttributes(new Dictionary<string, object> { { "class", "form-control" }, { "id", "TimeZone" } }).DataSource(timeZones).Fields(new DropDownListFieldSettings { Text = "Text", Value = "Value" }).Render();
+        }
+    </div>
+</div>

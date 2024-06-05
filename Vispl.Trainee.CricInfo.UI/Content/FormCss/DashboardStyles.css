@@ -1,26 +1,85 @@
-﻿#ControlRegion {
-    padding: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+﻿/* Container */
+#ControlRegion {
+    margin: 20px auto;
+    width: 90%;
 }
 
+/* Dashboard layout */
+#defaultLayout {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 10px;
+}
+
+/* Panel */
 .e-panel {
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
+    background-color: #f0f0f0;
     border-radius: 5px;
-    margin-bottom: 20px;
-    overflow: hidden;
-    width: calc(25% - 20px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
+/* Panel container */
 .e-panel-container {
     padding: 20px;
 }
 
+/* Text alignment */
 .text-align {
-    line-height: 1.5;
+    line-height: 160px;
     font-weight: 600;
     font-size: 20px;
     text-align: center;
 }
+
+/* Hyperlinks */
+.e-panel-container a {
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s ease;
+}
+
+    .e-panel-container a:hover {
+        color: #0056b3;
+    }
+
+
+/* Container 1 */
+/*#one .e-panel-container {
+    background-color: #ffc107;*/ /* Change color as desired */
+/*}*/
+
+/* Container 2 */
+/*#two .e-panel-container {
+    background-color: #28a745;*/ /* Change color as desired */
+/*}*/
+
+/* Container 3 */
+/*#three .e-panel-container {
+    background-color: #007bff;*/ /* Change color as desired */
+/*}*/
+
+/* Container 4 */
+/*#four .e-panel-container {
+    background-color: #dc3545;*/ /* Change color as desired */
+/*}*/
+
+/* Container 5 */
+/*#five .e-panel-container {
+    background-color: #17a2b8;*/ /* Change color as desired */
+/*}*/
+
+/* Container 6 */
+/*#six .e-panel-container {
+    background-color: #6610f2;*/ /* Change color as desired */
+/*}*/
+
+/* Container 7 */
+/*#seven .e-panel-container {
+    background-color: #6c757d;*/ /* Change color as desired */
+/*}*/
+
+/* Container 8 */
+/*#eight .e-panel-container {
+    background-color: #fd7e14;*/ /* Change color as desired */
+/*}*/

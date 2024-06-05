@@ -4,91 +4,82 @@
     ViewBag.Title = "MatchSchedule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/FormCss/MatchSchedule.css" rel="stylesheet" />
 
-<h2>Match Schedule</h2>
 
-@using (Html.BeginForm())
-{
-    <div class="form-group">
-        @Html.LabelFor(m => m.Team1)
-        @(Html.EJS().DropDownList("Team1", new Syncfusion.EJ2.DropDowns.DropDownList
+<div class="main">
+    <h2>Match Schedule</h2>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Team1)
+            @(Html.EJS().DropDownList("Team1", new Syncfusion.EJ2.DropDowns.DropDownList
         {
             DataSource = new List<string> { "Team A", "Team B", "Team C" },
             Placeholder = "Select Team",
             Value = Model.Team1
         }).Render())
-        @Html.ValidationMessageFor(m => m.Team1)
-    </div>
+            @Html.ValidationMessageFor(m => m.Team1)
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Team2)
-        @(Html.EJS().DropDownList("Team2", new Syncfusion.EJ2.DropDowns.DropDownList
+        <div class="form-group">
+            @Html.LabelFor(m => m.Team2)
+            @(Html.EJS().DropDownList("Team2", new Syncfusion.EJ2.DropDowns.DropDownList
         {
             DataSource = new List<string> { "Team A", "Team B", "Team C" },
             Placeholder = "Select Team",
             Value = Model.Team2
         }).Render())
-        @Html.ValidationMessageFor(m => m.Team2)
-    </div>
+            @Html.ValidationMessageFor(m => m.Team2)
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.MatchDate)
-        @(Html.EJS().DateTimePickerFor(m => m.MatchDate, new Syncfusion.EJ2.Calendars.DateTimePicker
-        {
-            Value = Model.MatchDate
-        }).Render())
-        @Html.ValidationMessageFor(m => m.MatchDate)
-    </div>
+        <div class="form-group">
+            @Html.Partial("_DateTimeTimeZone", Model)
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.TimeZone)
-        @(Html.EJS().DropDownList("TimeZone", new Syncfusion.EJ2.DropDowns.DropDownList
-        {
-            DataSource = new List<string> { "UTC", "EST", "CST", "PST" },
-            Placeholder = "Select Time Zone",
-            Value = Model.TimeZone
-        }).Render())
-        @Html.ValidationMessageFor(m => m.TimeZone)
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.Venue)
-        @(Html.EJS().DropDownList("Venue", new Syncfusion.EJ2.DropDowns.DropDownList
+        <div class="form-group">
+            @Html.LabelFor(m => m.Venue)
+            @(Html.EJS().DropDownList("Venue", new Syncfusion.EJ2.DropDowns.DropDownList
         {
             DataSource = new List<string> { "Stadium 1", "Stadium 2", "Stadium 3" },
             Placeholder = "Select Venue",
             Value = Model.Venue
         }).Render())
-        @Html.ValidationMessageFor(m => m.Venue)
-    </div>
+            @Html.ValidationMessageFor(m => m.Venue)
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(m => m.MatchFormat)
-        <div>
-            @(Html.EJS().RadioButton("MatchFormatTest", new Syncfusion.EJ2.Buttons.RadioButton
+        <div class="form-group">
+            @Html.LabelFor(m => m.MatchFormat)
+            <div>
+                @(Html.EJS().RadioButton("MatchFormatTest", new Syncfusion.EJ2.Buttons.RadioButton
             {
                 Label = "Test",
                 Name = "MatchFormat",
                 Value = "Test",
                 Checked = Model.MatchFormat == "Test"
             }).Render())
-            @(Html.EJS().RadioButton("MatchFormatODI", new Syncfusion.EJ2.Buttons.RadioButton
+                @(Html.EJS().RadioButton("MatchFormatODI", new Syncfusion.EJ2.Buttons.RadioButton
             {
                 Label = "ODI",
                 Name = "MatchFormat",
                 Value = "ODI",
                 Checked = Model.MatchFormat == "ODI"
             }).Render())
-            @(Html.EJS().RadioButton("MatchFormatT20", new Syncfusion.EJ2.Buttons.RadioButton
+                @(Html.EJS().RadioButton("MatchFormatT20", new Syncfusion.EJ2.Buttons.RadioButton
             {
                 Label = "T20",
                 Name = "MatchFormat",
                 Value = "T20",
                 Checked = Model.MatchFormat == "T20"
             }).Render())
+            </div>
+            @Html.ValidationMessageFor(m => m.MatchFormat)
         </div>
-        @Html.ValidationMessageFor(m => m.MatchFormat)
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-}
+
