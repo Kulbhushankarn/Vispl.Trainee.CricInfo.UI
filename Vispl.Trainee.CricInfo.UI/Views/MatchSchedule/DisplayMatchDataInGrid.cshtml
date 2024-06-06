@@ -8,10 +8,10 @@
 
 <h2>Matches List</h2>
 
-<p>
+@*<p>
     <button id="createNewButton" class="e-btn e-flat e-primary">Create New</button>
 </p>
-
+*@
 @(Html.EJS().Grid<Vispl.Trainee.CricInfo.VO.Cls_MatchSchedule_VO>("GridOverview")
     .DataSource(Model)
     .AllowFiltering()

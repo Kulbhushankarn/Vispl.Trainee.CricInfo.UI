@@ -22,30 +22,66 @@ namespace Vispl.Trainee.CricInfo.DL
                 using (SqlConnection cnn = new SqlConnection(_connectionString))
                 {
                     cnn.Open();
-                    string query = "INSERT INTO TeamCreate" +
-                                   "(TeamName, TeamShortName, TeamPlayer, TeamCaptain, TeamWicketKeeper, TeamViceCaptain)" +
-                                   "VALUES" +
-                                   "(@TeamName, @TeamShortName, @TeamPlayer, @TeamCaptain, @TeamWicketKeeper, @TeamViceCaptain);";
-                    using (SqlCommand cmd = new SqlCommand(query, cnn))
+                    using (SqlTransaction transaction = cnn.BeginTransaction())
                     {
-                        cmd.Parameters.AddWithValue("@TeamName", team.TeamName);
-                        cmd.Parameters.AddWithValue("@TeamShortName", team.TeamShortName);
-                        cmd.Parameters.AddWithValue("@TeamPlayer", string.Join(",", team.TeamPlayer)); // Convert List<long> to comma-separated string
-                        cmd.Parameters.AddWithValue("@TeamCaptain", team.TeamCaptain);
-                        cmd.Parameters.AddWithValue("@TeamWicketKeeper", team.TeamWicketKeeper);
-                        cmd.Parameters.AddWithValue("@TeamViceCaptain", team.TeamViceCaptain);
+                        try
+                        {
+                            // Insert into Teams table
+                            string query = "INSERT INTO TeamCreate (TeamName, TeamShortName, TeamCaptain, TeamWicketKeeper, TeamViceCaptain) " +
+                                           "VALUES (@TeamName, @TeamShortName, @TeamCaptain, @TeamWicketKeeper, @TeamViceCaptain); " +
+                                           "SELECT SCOPE_IDENTITY();";
+                            long teamId;
+                            using (SqlCommand cmd = new SqlCommand(query, cnn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@TeamName", team.TeamName);
+                                cmd.Parameters.AddWithValue("@TeamShortName", team.TeamShortName);
+                                cmd.Parameters.AddWithValue("@TeamCaptain", GetPlayerIdByName(cnn, transaction, team.TeamCaptain));
+                                cmd.Parameters.AddWithValue("@TeamWicketKeeper", GetPlayerIdByName(cnn, transaction, team.TeamWicketKeeper));
+                                cmd.Parameters.AddWithValue("@TeamViceCaptain", GetPlayerIdByName(cnn, transaction, team.TeamViceCaptain));
 
-                        return cmd.ExecuteNonQuery() > 0;
+                                teamId = Convert.ToInt64(cmd.ExecuteScalar());
+                            }
+
+                            // Insert into TeamPlayers table
+                            foreach (var playerName in team.TeamPlayer)
+                            {
+                                string playerQuery = "INSERT INTO TeamPlayers (TeamID, PlayerID) VALUES (@TeamID, @PlayerID);";
+                                using (SqlCommand playerCmd = new SqlCommand(playerQuery, cnn, transaction))
+                                {
+                                    playerCmd.Parameters.AddWithValue("@TeamID", teamId);
+                                    playerCmd.Parameters.AddWithValue("@PlayerID", GetPlayerIdByName(cnn, transaction, playerName));
+                                    playerCmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            transaction.Rollback();
+                            throw new Exception("Error adding team: " + ex.Message);
+                        }
                     }
                 }
             }
             catch (SqlException ex)
             {
-                throw ex;
+                throw new Exception("Database error: " + ex.Message);
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new Exception("Error: " + ex.Message);
+            }
+        }
+
+        private long GetPlayerIdByName(SqlConnection cnn, SqlTransaction transaction, string playerName)
+        {
+            string query = "SELECT PlayerID FROM Players WHERE Name = @Name";
+            using (SqlCommand cmd = new SqlCommand(query, cnn, transaction))
+            {
+                cmd.Parameters.AddWithValue("@Name", playerName);
+                return Convert.ToInt64(cmd.ExecuteScalar());
             }
         }
 
@@ -55,7 +91,11 @@ namespace Vispl.Trainee.CricInfo.DL
             using (SqlConnection cnn = new SqlConnection(_connectionString))
             {
                 cnn.Open();
-                string query = "SELECT * FROM TeamCreate";
+                string query = "SELECT t.TeamName, t.TeamShortName, p1.Name AS TeamCaptain, p2.Name AS TeamWicketKeeper, p3.Name AS TeamViceCaptain " +
+                               "FROM TeamCreate t " +
+                               "JOIN Players p1 ON t.TeamCaptain = p1.PlayerID " +
+                               "JOIN Players p2 ON t.TeamWicketKeeper = p2.PlayerID " +
+                               "JOIN Players p3 ON t.TeamViceCaptain = p3.PlayerID";
                 using (SqlCommand cmd = new SqlCommand(query, cnn))
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -66,10 +106,10 @@ namespace Vispl.Trainee.CricInfo.DL
                             {
                                 TeamName = reader["TeamName"].ToString(),
                                 TeamShortName = reader["TeamShortName"].ToString(),
-                                TeamPlayer = reader["TeamPlayer"].ToString().Split(',').ToList(), // Convert comma-separated string to List<long>
                                 TeamCaptain = reader["TeamCaptain"].ToString(),
                                 TeamWicketKeeper = reader["TeamWicketKeeper"].ToString(),
-                                TeamViceCaptain = reader["TeamViceCaptain"].ToString()
+                                TeamViceCaptain = reader["TeamViceCaptain"].ToString(),
+                                TeamPlayer = GetTeamPlayers(cnn, reader["TeamName"].ToString())
                             };
                             teams.Add(team);
                         }
@@ -78,6 +118,47 @@ namespace Vispl.Trainee.CricInfo.DL
             }
             return teams;
         }
+
+        private List<string> GetTeamPlayers(SqlConnection cnn, string teamName)
+        {
+            List<string> players = new List<string>();
+            string query = "SELECT p.Name FROM TeamPlayers tp " +
+                           "JOIN Players p ON tp.PlayerID = p.PlayerID " +
+                           "JOIN Teams t ON tp.TeamID = t.TeamID " +
+                           "WHERE t.TeamName = @TeamName";
+
+            using (SqlCommand cmd = new SqlCommand(query, cnn))
+            {
+                cmd.Parameters.AddWithValue("@TeamName", teamName);
+
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    try
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                players.Add(reader["Name"].ToString());
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle the exception here
+                        // Log or throw the exception as needed
+                    }
+                }
+            }
+
+            return players;
+        }
+
+
+
+
+
 
         public List<string> GetPlayerNames()
         {
