@@ -157,9 +157,6 @@ namespace Vispl.Trainee.CricInfo.DL
 
 
 
-
-
-
         public List<string> GetPlayerNames()
         {
             List<string> playerNames = new List<string>();

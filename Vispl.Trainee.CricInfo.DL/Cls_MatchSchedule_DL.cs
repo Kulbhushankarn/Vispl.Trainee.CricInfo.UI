@@ -33,7 +33,7 @@ namespace Vispl.Trainee.CricInfo.DL
                             cmd.Parameters.AddWithValue("@TimeZone", matchSchedule.TimeZone);
                             cmd.Parameters.AddWithValue("@Venue", matchSchedule.Venue);
                             cmd.Parameters.AddWithValue("@MatchFormat", matchSchedule.MatchFormat);
-
+                            
                             cmd.ExecuteNonQuery();
                         }
 
@@ -43,10 +43,12 @@ namespace Vispl.Trainee.CricInfo.DL
                     {
                         transaction.Rollback();
                         throw new Exception("Error adding match schedule: " + ex.Message);
-                    }
+                    } 
                 }
             }
         }
+
+        public int MyProperty { get; set; }
 
         public List<Cls_MatchSchedule_VO> GetAllMatchSchedules()
         {
@@ -56,7 +58,7 @@ namespace Vispl.Trainee.CricInfo.DL
             {
                 cnn.Open();
                 string query = "SELECT Team1, Team2, MatchDate, TimeZone, Venue, MatchFormat FROM MatchSchedule";
-                using (SqlCommand cmd = new SqlCommand(query, cnn))
+                using (SqlCommand cmd = new SqlCommand(query, cnn)) 
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
