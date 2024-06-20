@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Vispl.Trainee.CricInfo.VO.Cls_MatchSchedule_VO>
 
-
 @{
     ViewBag.Title = "DisplayMatchDataInGrid";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,21 +7,16 @@
 
 <h2>Matches List</h2>
 
-@*<p>
-    <button id="createNewButton" class="e-btn e-flat e-primary">Create New</button>
-</p>
-*@
 @(Html.EJS().Grid<Vispl.Trainee.CricInfo.VO.Cls_MatchSchedule_VO>("GridOverview")
     .DataSource(Model)
     .AllowFiltering()
     .Columns(col =>
     {
-
-        col.Field("Team1").HeaderText("Team 1").Width("100").Add();
-        col.Field("Team2").HeaderText("Team 2").Width("100").Add();
+        col.Field("Team1Name").HeaderText("Team 1").Width("100").Add();
+        col.Field("Team2Name").HeaderText("Team 2").Width("100").Add();
         col.Field("MatchDate").HeaderText("Match Date").Width("100").Add();
         col.Field("TimeZone").HeaderText("Time Zone").Width("100").Add();
-        col.Field("Venue").HeaderText("Venue").Width("100").Add();
+        col.Field("VenueName").HeaderText("Venue").Width("100").Add();
         col.Field("MatchFormat").HeaderText("Match Format").Width("100").Add();
     })
     .Render()
@@ -33,5 +27,3 @@
         window.location.href = '@Url.Action("MatchSchedule", "MatchSchedule")';
     });
 </script>
-
-

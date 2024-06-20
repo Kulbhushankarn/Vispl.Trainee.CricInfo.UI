@@ -196,6 +196,8 @@
     <Content Include="Content\FormCss\LoginSheet1.css" />
     <Content Include="Content\FormCss\MatchSchedule.css" />
     <Content Include="Content\FormCss\PlayerForm.css" />
+    <Content Include="Content\Images\Computer login-amico.svg" />
+    <Content Include="Content\Images\Computer login-rafiki.svg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

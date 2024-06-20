@@ -6,7 +6,7 @@
     <div class="form-group">
         <label for="DateTime">Date and Time:</label>
         @{
-            @Html.EJS().DateTimePicker("DateTimePicker").HtmlAttributes(new Dictionary<string, object> { { "class", "form-control" }, { "id", "DateTime" } }).Render();
+            @Html.EJS().DateTimePicker("MatchDate").Render();
         }
     </div>
 
@@ -17,7 +17,7 @@
                 .Select(tz => new { Value = tz.Id, Text = tz.DisplayName })
                 .ToList();
 
-            @Html.EJS().DropDownList("TimeZoneDropDown").HtmlAttributes(new Dictionary<string, object> { { "class", "form-control" }, { "id", "TimeZone" } }).DataSource(timeZones).Fields(new DropDownListFieldSettings { Text = "Text", Value = "Value" }).Render();
+            @Html.EJS().DropDownList("TimeZone").HtmlAttributes(new Dictionary<string, object> { { "class", "form-control" }, { "id", "TimeZone" } }).DataSource(timeZones).Fields(new DropDownListFieldSettings { Text = "Text", Value = "Value" }).Render();
         }
     </div>
 </div>

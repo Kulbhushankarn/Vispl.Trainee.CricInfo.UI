@@ -1,30 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Vispl.Trainee.CricInfo.VO
 {
     public class Cls_MatchSchedule_VO
     {
-        [Required]
-        public string Team1 { get; set; }
-
-        [Required]
-        public string Team2 { get; set; }
-
-        [Required]
-        public DateTime MatchDate { get; set; }
-
-        [Required]
+        public long Team1ID { get; set; }
+        public long Team2ID { get; set; }
+        public DateTime? MatchDate { get; set; }
         public string TimeZone { get; set; }
-
-        [Required]
-        public string Venue { get; set; }
-
-        [Required]
+        public long Venue { get; set; }
         public string MatchFormat { get; set; }
+
+        public string Team1Name { get; set; }
+        public string Team2Name { get; set; }
+        public string VenueName { get; set; }
     }
 }

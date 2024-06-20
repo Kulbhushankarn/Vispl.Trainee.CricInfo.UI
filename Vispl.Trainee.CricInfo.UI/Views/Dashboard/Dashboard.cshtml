@@ -3,68 +3,149 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<!-- Ensure Font Awesome is included -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-DydL6VE0bG7KnZ8ZT6feUDHjDZojYvvZ/O7dA8F1wR5jvCZk52W2TxZyS+52E6qLYEqdQ9MWikHUJLq8G+Uf2w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <div id="ControlRegion">
     <div class="control-section">
         <div>
-            @Html.EJS().DashboardLayout("defaultLayout").Columns(6).ContentTemplate(@<div>
-                <div id="one" class="e-panel" data-row="0" data-col="0" data-sizeX="1" data-sizeY="1" >
+            <!-- Syncfusion Dashboard Layout with Font Awesome icons -->
+            @Html.EJS().DashboardLayout("defaultLayout").Columns(5).ContentTemplate(@<div>
+                <div id="one" class="e-panel" data-row="0" data-col="0" data-sizeX="1" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align"><a href='~/PlayerDetails/DisplayPlayersDataInGrid'>Player Details</div>
+                        <div class="panel-content">
+                            <i class="fas fa-user icon"></i>
+                            <a href='~/PlayerDetails/DisplayPlayersDataInGrid'>Player Details</a>
+                        </div>
                     </div>
                 </div>
-                <div id="two" class="e-panel" data-row="1" data-col="0" data-sizeX="1" data-sizeY="2" >
+                <div id="two" class="e-panel" data-row="1" data-col="0" data-sizeX="1" data-sizeY="2">
                     <div class="e-panel-container">
-                        <div class="text-align"><a href='~/TeamDetails/DisplayTeamDetailsInGrid'>Team Details</div>
+                        <div class="panel-content">
+                            <i class="fas fa-users icon"></i>
+                            <a href='~/TeamDetails/DisplayTeamDetailsInGrid'>Team Details</a>
+                        </div>
                     </div>
                 </div>
                 <div id="three" class="e-panel" data-row="0" data-col="1" data-sizeX="2" data-sizeY="2">
                     <div class="e-panel-container">
-                        <div class="text-align"><a href='/MatchSchedule/DisplayMatchDataInGrid'>Match Scheduling</div>
+                        <div class="panel-content">
+                            <i class="fas fa-calendar-alt icon"></i>
+                            <a href='/MatchSchedule/DisplayMatchDataInGrid'>Match Scheduling</a>
+                        </div>
                     </div>
                 </div>
                 <div id="four" class="e-panel" data-row="2" data-col="1" data-sizeX="1" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">3</div>
+                        <div class="panel-content">
+                            <i class="fas fa-chart-bar icon"></i>
+                            <span>Analytics</span>
+                        </div>
                     </div>
                 </div>
                 <div id="five" class="e-panel" data-row="2" data-col="2" data-sizeX="2" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">4</div>
+                        <div class="panel-content">
+                            <i class="fas fa-cog icon"></i>
+                            <span>Settings</span>
+                        </div>
                     </div>
                 </div>
                 <div id="six" class="e-panel" data-row="0" data-col="3" data-sizeX="1" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">5</div>
+                        <div class="panel-content">
+                            <i class="fas fa-envelope icon"></i>
+                            <span>Messages</span>
+                        </div>
                     </div>
                 </div>
                 <div id="seven" class="e-panel" data-row="1" data-col="3" data-sizeX="1" data-sizeY="1">
                     <div class="e-panel-container">
-                        <div class="text-align">6</div>
+                        <div class="panel-content">
+                            <i class="fas fa-bell icon"></i>
+                            <span>Notifications</span>
+                        </div>
                     </div>
                 </div>
                 <div id="eight" class="e-panel" data-row="0" data-col="4" data-sizeX="1" data-sizeY="3">
                     <div class="e-panel-container">
-                        <div class="text-align">7</div>
+                        <div class="panel-content">
+                            <i class="fas fa-file-alt icon"></i>
+                            <span>Reports</span>
+                        </div>
                     </div>
                 </div>
             </div>).Render()
         </div>
     </div>
-    <style>
-        #defaultLayout {
-            padding: 10px;
+</div>
+
+<style>
+    #defaultLayout {
+        padding: 10px;
+    }
+
+        #defaultLayout .e-panel .e-panel-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out;
+            background-color: #f0f0f0; /* Light gray background */
+            overflow: hidden;
+            position: relative;
         }
 
-            #defaultLayout .e-panel .e-panel-container {
-                vertical-align: middle;
-                font-weight: 600;
-                font-size: 20px;
-                text-align: center;
+        #defaultLayout .e-panel:hover .e-panel-container {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+    .panel-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+
+        .panel-content .icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #007bff; /* Blue color for icons */
+        }
+
+        .panel-content a, .panel-content span {
+            font-weight: bold;
+            text-decoration: none;
+            color: #333;
+            transition: color 0.2s ease-in-out;
+        }
+
+            .panel-content a:hover, .panel-content span:hover {
+                color: #007bff;
             }
 
-        .text-align {
-            line-height: 160px;
-        }
-    </style>
-</div>
+    /* Background overlay on hover */
+    .e-panel-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 123, 255, 0.2); /* Semi-transparent blue overlay */
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+        z-index: 0;
+    }
+
+    .e-panel:hover .e-panel-container::before {
+        opacity: 1;
+    }
+</style>
