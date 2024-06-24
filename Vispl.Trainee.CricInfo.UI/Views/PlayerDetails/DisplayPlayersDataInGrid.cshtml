@@ -18,6 +18,7 @@
     .Columns(col =>
     {
         /*        col.Type("checkbox").HeaderText("").Field("").Width("60").AllowFiltering(false).AllowSorting(false).Add();*/
+        col.Field("Picture").HeaderText("Picture").Width("150").Template("<img src='${Picture}' style='width: 100px; height: 100px;' alt='Player Image' />").Add();
         col.Field("JerseyNo").HeaderText("Jersey No").Width("100").Add();
         col.Field("Name").HeaderText("Name").Width("150").Add();
         col.Field("DateOfBirth").HeaderText("Date Of Birth").Width("150").Add();
@@ -38,7 +39,8 @@
         col.Field("ICCRanking").HeaderText("ICC Ranking").Width("100").Add();
         col.Field("BowlingAverage").HeaderText("Bowling Average").Width("100").Add();
         col.Field("Team").HeaderText("Team").Width("100").Add();
-        col.Field("PlayerID").HeaderText("Actions").Template("<a href='Edit/{{:PlayerID}}'>Edit</a> | <a href='Details/{{:PlayerID}}'>Details</a> | <a href='Delete/{{:PlayerID}}'>Delete</a>").Width("200").Add();
+        /*        col.Field("PlayerID").HeaderText("Actions").Template("<a href='Edit/{{:PlayerID}}'>Edit</a> | <a href='Details/{{:PlayerID}}'>Details</a> | <a href='Delete/{{:PlayerID}}'>Delete</a>").Width("200").Add();
+        */
     })
     .Render()
 )

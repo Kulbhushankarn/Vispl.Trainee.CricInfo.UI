@@ -15,15 +15,12 @@ namespace Vispl.Trainee.CricInfo.BL
 
         public void AddMatchSchedule(Cls_MatchSchedule_VO matchSchedule)
         {
-            // Perform any necessary business logic validations here if needed
 
-            // Pass the request to the data access layer
             _matchScheduleDL.AddMatchSchedule(matchSchedule);
         }
 
         public List<Cls_MatchSchedule_VO> GetAllMatchSchedules()
         {
-            // Retrieve match schedules with team and venue names from the data access layer
             return _matchScheduleDL.GetAllMatchSchedulesWithNames();
         }
 
@@ -36,5 +33,10 @@ namespace Vispl.Trainee.CricInfo.BL
         {
             return _matchScheduleDL.GetVenues();
         }
+        public Cls_MatchSchedule_VO GetMatchDetails(long matchId)
+        {
+            return _matchScheduleDL.GetMatchDetails(matchId); 
+        }
+
     }
 }

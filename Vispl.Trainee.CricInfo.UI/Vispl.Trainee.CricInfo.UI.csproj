@@ -244,6 +244,8 @@
     <Content Include="Views\TeamDetails\DisplayTeamDetailsInGrid.cshtml" />
     <Content Include="Views\Shared\_DateTimeTimeZone.cshtml" />
     <Content Include="Views\MatchSchedule\DisplayMatchDataInGrid.cshtml" />
+    <Content Include="Views\MatchSchedule\Filter.cshtml" />
+    <Content Include="Views\MatchSchedule\StartMatch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

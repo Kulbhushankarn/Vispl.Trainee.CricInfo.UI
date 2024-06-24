@@ -1,0 +1,54 @@
+﻿@model Vispl.Trainee.CricInfo.VO.Cls_Filter_VO
+
+@{
+    ViewBag.Title = "Filter Match Schedules";
+}
+
+<h2>Filter Match Schedules</h2>
+
+@using (Html.BeginForm("Filter", "MatchSchedule", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FromDate)
+        @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @type = "date" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ToDate)
+        @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @type = "date" })
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+}
+
+@if (Model.FilteredMatchSchedules != null && Model.FilteredMatchSchedules.Any())
+{
+    <h3>Filtered Match Schedules</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Team 1</th>
+                <th>Team 2</th>
+                <th>Match Date</th>
+                <th>Time Zone</th>
+                <th>Venue</th>
+                <th>Match Format</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var match in Model.FilteredMatchSchedules)
+            {
+                <tr>
+                    <td>@match.Team1Name</td>
+                    <td>@match.Team2Name</td>
+                    <td>@match.MatchDate</td>
+                    <td>@match.TimeZone</td>
+                    <td>@match.VenueName</td>
+                    <td>@match.MatchFormat</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (Model.FilteredMatchSchedules != null)
+{
+    <p>No match schedules found for the specified date range.</p>
+}

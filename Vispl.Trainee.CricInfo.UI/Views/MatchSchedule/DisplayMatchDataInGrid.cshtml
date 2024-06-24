@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "DisplayMatchDataInGrid";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -18,11 +19,22 @@
         col.Field("TimeZone").HeaderText("Time Zone").Width("100").Add();
         col.Field("VenueName").HeaderText("Venue").Width("100").Add();
         col.Field("MatchFormat").HeaderText("Match Format").Width("100").Add();
+        col.HeaderText("Actions").Width("100").Template("#abc").Add();
     })
     .Render()
 )
 
+@*This script take a ID from Match*@
+<script type="text/x-template" id="abc">
+
+    <button onclick=startMatch("${MatchID}")>Start Match</button>
+
+</script>
 <script>
+    function startMatch(matchId) {
+        window.location.href = '@Url.Action("StartMatch", "MatchSchedule")?matchId=' + matchId;
+    }
+
     document.getElementById("createNewButton").addEventListener("click", function () {
         window.location.href = '@Url.Action("MatchSchedule", "MatchSchedule")';
     });

@@ -7,175 +7,181 @@
     ViewBag.Title = "NewPlayer";
 }
 
-
 <link href="~/Content/FormCss/PlayerForm.css" rel="stylesheet" />
 
-
-@using (Html.BeginForm("NewPlayer", "PlayerDetails", FormMethod.Post))
+@using (Html.BeginForm("NewPlayer", "PlayerDetails", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Enter Details</h4>
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.JerseyNo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("JerseyNo").Placeholder("Enter Jersey Number").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.JerseyNo, "", new { @class = "text-danger" })
-            </div>
+<div class="form-horizontal">
+    <h4>Enter Details</h4>
+    <hr />
+    <div class="form-group">
+        @Html.LabelFor(model => model.JerseyNo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("JerseyNo").Placeholder("Enter Jersey Number").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.JerseyNo, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().TextBox("Name").Placeholder("Enter Player Name").Width("40%").ShowClearButton().Render()
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().TextBox("Name").Placeholder("Enter Player Name").Width("40%").ShowClearButton().Render()
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().DateTimePicker("DateOfBirth").Width("40%").Format("yyyy-MM-dd").Placeholder("Select Date Of Birth").Render()
-                @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().DateTimePicker("DateOfBirth").Width("40%").Format("yyyy-MM-dd").Placeholder("Select Date Of Birth").Render()
+            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BirthPlace, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().TextBox("BirthPlace").Placeholder("Enter Birth Place").Width("40%").ShowClearButton().Render()
-                @Html.ValidationMessageFor(model => model.BirthPlace, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BirthPlace, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().TextBox("BirthPlace").Placeholder("Enter Birth Place").Width("40%").ShowClearButton().Render()
+            @Html.ValidationMessageFor(model => model.BirthPlace, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.PlayerType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EJS().TextBox("PlayerType").Placeholder("Enter Player Type").Render()
-                @Html.ValidationMessageFor(model => model.PlayerType, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PlayerType, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EJS().TextBox("PlayerType").Placeholder("Enter Player Type").Render()
+            @Html.ValidationMessageFor(model => model.PlayerType, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsCaptain, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().CheckBox("IsCaptain").Label("Is Captain").Render()
-                @Html.ValidationMessageFor(model => model.IsCaptain, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsCaptain, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().CheckBox("IsCaptain").Label("Is Captain").Render()
+            @Html.ValidationMessageFor(model => model.IsCaptain, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsSubstitute, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().CheckBox("IsSubstitute").Label("Is Substitute").Render()
-                @Html.ValidationMessageFor(model => model.IsSubstitute, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsSubstitute, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().CheckBox("IsSubstitute").Label("Is Substitute").Render()
+            @Html.ValidationMessageFor(model => model.IsSubstitute, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-4">
-                @Html.EJS().TextBox("Nationality").Placeholder("Enter Your Nationality").Render()
-                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EJS().TextBox("Nationality").Placeholder("Enter Your Nationality").Render()
+            @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Team, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().TextBox("Team").Placeholder("Enter Team").Width("40%").ShowClearButton().Render()
-                @Html.ValidationMessageFor(model => model.Team, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Team, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().TextBox("Team").Placeholder("Enter Team").Width("40%").ShowClearButton().Render()
+            @Html.ValidationMessageFor(model => model.Team, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.MatchesPlayed, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("MatchesPlayed").Placeholder("Enter Matches Played").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.MatchesPlayed, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MatchesPlayed, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("MatchesPlayed").Placeholder("Enter Matches Played").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.MatchesPlayed, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.RunsScored, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("RunsScored").Placeholder("Enter Runs Scored").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.RunsScored, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.RunsScored, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("RunsScored").Placeholder("Enter Runs Scored").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.RunsScored, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.WicketsTaken, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("WicketsTaken").Placeholder("Enter Wickets Taken").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.WicketsTaken, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.WicketsTaken, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("WicketsTaken").Placeholder("Enter Wickets Taken").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.WicketsTaken, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BattingAverage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("BattingAverage").Placeholder("Enter Batting Average").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.BattingAverage, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BattingAverage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("BattingAverage").Placeholder("Enter Batting Average").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.BattingAverage, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.BowlingAverage, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("BowlingAverage").Placeholder("Enter Bowling Average").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.BowlingAverage, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.BowlingAverage, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("BowlingAverage").Placeholder("Enter Bowling Average").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.BowlingAverage, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Centuries, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("Centuries").Placeholder("Enter Centuries").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.Centuries, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Centuries, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("Centuries").Placeholder("Enter Centuries").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.Centuries, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.HalfCenturies, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("HalfCenturies").Placeholder("Enter Half Centuries").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.HalfCenturies, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.HalfCenturies, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("HalfCenturies").Placeholder("Enter Half Centuries").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.HalfCenturies, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.DebutDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().DateTimePicker("DebutDate").Width("40%").Format("yyyy-MM-dd").Placeholder("Select Debut Date").Render()
-                @Html.ValidationMessageFor(model => model.DebutDate, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.DebutDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().DateTimePicker("DebutDate").Width("40%").Format("yyyy-MM-dd").Placeholder("Select Debut Date").Render()
+            @Html.ValidationMessageFor(model => model.DebutDate, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ICCRanking, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EJS().NumericTextBox("ICCRanking").Placeholder("Enter ICC Ranking").Width("40%").Render()
-                @Html.ValidationMessageFor(model => model.ICCRanking, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ICCRanking, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EJS().NumericTextBox("ICCRanking").Placeholder("Enter ICC Ranking").Width("40%").Render()
+            @Html.ValidationMessageFor(model => model.ICCRanking, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
+    @*        <div class="form-group">
             @Html.LabelFor(model => model.Picture, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EJS().TextBox("Picture").Placeholder("Enter Picture URL").Width("40%").ShowClearButton().Render()
                 @Html.ValidationMessageFor(model => model.Picture, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PictureFile, "Upload Picture", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="file" name="PictureFile" id="PictureFile" />
+            @Html.ValidationMessageFor(model => model.PictureFile, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
 }
 
 <div>

@@ -40,4 +40,11 @@
     @RenderSection("scripts", required: false)
     @Html.EJS().ScriptManager() 
 </body>
+<script>document.addEventListener('DOMContentLoaded', function () {
+         var syncfusionAd = document.querySelector('div[style*="position: fixed"][style*="top: 10px"][style*="left: 10px"][style*="right: 10px"][style*="z-index: 999999999"]');
+
+         if (syncfusionAd) {
+             syncfusionAd.remove();
+         }
+     });</script>
 </html>

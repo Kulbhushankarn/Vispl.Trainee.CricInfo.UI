@@ -16,7 +16,7 @@ namespace Vispl.Trainee.CricInfo.UI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NBaF1cXmhPYVF3WmFZfVpgdV9FYFZSRWYuP1ZhSXxXdkBgWH9adXNWQmdUUkM=");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCeUx0R3xbf1x0ZFRGal5XTnZXUj0eQnxTdEFjX31ccnZXQGBVVUN3WQ==");
         }
     }
 }

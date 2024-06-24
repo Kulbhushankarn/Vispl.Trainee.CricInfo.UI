@@ -65,7 +65,7 @@ namespace Vispl.Trainee.CricInfo.DL
             using (SqlConnection cnn = new SqlConnection(_connectionString))
             {
                 cnn.Open();
-                string query = @"SELECT ms.Team1ID, ms.Team2ID, ms.MatchDate, ms.TimeZone, ms.Venue, ms.MatchFormat,
+                string query = @"SELECT ms.MatchID, ms.Team1ID, ms.Team2ID, ms.MatchDate, ms.TimeZone, ms.Venue, ms.MatchFormat,
                          t1.TeamName AS Team1Name, t2.TeamName AS Team2Name, s.VenueName
                          FROM MatchSchedule ms
                          INNER JOIN TeamCreate t1 ON ms.Team1ID = t1.TeamID
@@ -79,6 +79,7 @@ namespace Vispl.Trainee.CricInfo.DL
                         {
                             Cls_MatchSchedule_VO matchSchedule = new Cls_MatchSchedule_VO
                             {
+                                MatchID = reader.GetInt64(reader.GetOrdinal("MatchID")),
                                 Team1ID = reader.GetInt64(reader.GetOrdinal("Team1ID")),
                                 Team2ID = reader.GetInt64(reader.GetOrdinal("Team2ID")),
                                 MatchDate = reader.IsDBNull(reader.GetOrdinal("MatchDate")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("MatchDate")),
@@ -145,5 +146,47 @@ namespace Vispl.Trainee.CricInfo.DL
 
             return venues;
         }
+
+        public Cls_MatchSchedule_VO GetMatchDetails(long matchId)
+        {
+            Cls_MatchSchedule_VO matchDetails = null;
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var query = @"
+            SELECT 
+                t1.TeamName AS Team1Name, 
+                t2.TeamName AS Team2Name
+            FROM 
+                MatchSchedule ms
+                INNER JOIN TeamCreate t1 ON ms.Team1ID = t1.TeamID
+                INNER JOIN TeamCreate t2 ON ms.Team2ID = t2.TeamID
+            WHERE 
+                ms.MatchID = @MatchID";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@MatchID", matchId);
+
+                    connection.Open();
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            matchDetails = new Cls_MatchSchedule_VO
+                            {
+                                Team1Name = reader.GetString(reader.GetOrdinal("Team1Name")),
+                                Team2Name = reader.GetString(reader.GetOrdinal("Team2Name"))
+                            };
+                        }
+                    }
+                }
+            }
+
+            return matchDetails;
+        }
+
+
+
     }
 }

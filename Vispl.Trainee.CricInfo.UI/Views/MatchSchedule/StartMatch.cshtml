@@ -1,0 +1,57 @@
+﻿@model Vispl.Trainee.CricInfo.VO.Cls_MatchSchedule_VO
+
+@{
+    ViewBag.Title = "Start Match";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Start Match</h2>
+
+@if (Model != null)
+{
+    <div>
+        <h3>Teams</h3>
+        <p>Team 1: @Model.Team1Name</p>
+        <span>VS</span>
+        <p>Team 2: @Model.Team2Name</p>
+
+        <form id="tossForm">
+            <div>
+                <label>
+                    <input type="radio" name="toss" value="heads" /> Heads
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="toss" value="tails" /> Tails
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="team" value="team1" /> @Model.Team1Name
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="team" value="team2" /> @Model.Team2Name
+                </label>
+            </div>
+            <button type="button" onclick="submitToss()">Submit Toss</button>
+        </form>
+        <div id="tossResult"></div>
+    </div>
+}
+else
+{
+    <p>Match details not found.</p>
+}
+
+<script>
+    function submitToss() {
+        var tossResult = Math.random() < 0.5 ? 'heads' : 'tails';
+        var selectedTeam = document.querySelector('input[name="team"]:checked').value;
+        var teamName = selectedTeam === 'team1' ? '@Model.Team1Name' : '@Model.Team2Name';
+
+        document.getElementById('tossResult').innerHTML = "The toss result is: " + tossResult + ". " + teamName + " wins the toss.";
+    }
+</script>

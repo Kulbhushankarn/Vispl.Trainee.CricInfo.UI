@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Vispl.Trainee.CricInfo.VO
 {
@@ -134,11 +135,6 @@ namespace Vispl.Trainee.CricInfo.VO
         [Display(Name = "ICC Ranking")]
         public int ICCRanking { get; set; }
 
-        /// <summary>
-        /// Gets or sets the URL of the player's profile picture.
-        /// </summary>
-        [Display(Name = "Profile Picture URL")]
-        public string Picture { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Cls_Player_VO"/> class.
@@ -147,5 +143,7 @@ namespace Vispl.Trainee.CricInfo.VO
         {
             // Initialize other statistics if necessary
         }
+        public HttpPostedFileBase PictureFile { get; set; }
+        public string Picture { get; set; }
     }
 }
