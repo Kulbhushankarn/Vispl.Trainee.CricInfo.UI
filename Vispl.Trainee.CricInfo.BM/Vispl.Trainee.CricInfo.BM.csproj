@@ -53,6 +53,7 @@
     <Compile Include="Cls_CreateTeam_BM.cs" />
     <Compile Include="Cls_MatchSchedule_BM.cs" />
     <Compile Include="Cls_Player_BM.cs" />
+    <Compile Include="Cls_Toss_BM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

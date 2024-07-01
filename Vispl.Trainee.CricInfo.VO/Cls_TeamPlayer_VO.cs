@@ -15,6 +15,7 @@ namespace Vispl.Trainee.CricInfo.VO
             public string TeamCaptain { get; set; }
             public string TeamWicketKeeper { get; set; }
             public string TeamViceCaptain { get; set; }
+            public long TeamID { get; set; }
 
-        }
+    }
 }

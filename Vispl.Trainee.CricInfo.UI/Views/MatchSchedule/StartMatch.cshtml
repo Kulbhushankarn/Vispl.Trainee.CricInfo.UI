@@ -41,6 +41,7 @@
         <div id="tossResult"></div>
     </div>
 }
+
 else
 {
     <p>Match details not found.</p>
@@ -48,9 +49,9 @@ else
 
 <script>
     function submitToss() {
-        var tossResult = Math.random() < 0.5 ? 'heads' : 'tails';
-        var selectedTeam = document.querySelector('input[name="team"]:checked').value;
-        var teamName = selectedTeam === 'team1' ? '@Model.Team1Name' : '@Model.Team2Name';
+        let tossResult = Math.random() < 0.5 ? 'heads' : 'tails';
+        let selectedTeam = document.querySelector('input[name="team"]:checked').value;
+        let teamName = selectedTeam === 'team1' ? '@Model.Team1Name' : '@Model.Team2Name';
 
         document.getElementById('tossResult').innerHTML = "The toss result is: " + tossResult + ". " + teamName + " wins the toss.";
     }

@@ -54,6 +54,7 @@
     <Compile Include="Cls_MatchSchedule_VO.cs" />
     <Compile Include="Cls_Player_VO.cs" />
     <Compile Include="Cls_TeamPlayer_VO.cs" />
+    <Compile Include="Cls_Toss_VO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

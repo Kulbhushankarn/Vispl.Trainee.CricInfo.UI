@@ -1,15 +1,11 @@
 ﻿@model IEnumerable<Vispl.Trainee.CricInfo.VO.Cls_TeamPlayer_VO>
 
-@{ 
+@{
     ViewBag.Title = "DisplayTeamDetailsInGrid";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Team List</h2>
-
-@*<p>
-    <button id="createNewButton" class="e-btn e-flat e-primary">Create New</button>
-</p>*@
 
 @(Html.EJS().Grid<Vispl.Trainee.CricInfo.VO.Cls_TeamPlayer_VO>("GridOverview")
         .DataSource(Model)
@@ -19,16 +15,30 @@
         {
             col.Field("TeamName").HeaderText("Team Name").Width("100").Add();
             col.Field("TeamShortName").HeaderText("Team Short Name").Width("100").Add();
-            col.Field("TeamPlayer").HeaderText("Team Players").Width("100").Add();
+            col.Template("<div class='team-players'></div>").HeaderText("Team Players").Width("200").Add();
             col.Field("TeamCaptain").HeaderText("Team Captain").Width("100").Add();
-            col.Field("TeamWicketKeeper").HeaderText("Team Wicket Keeper").Width("100").Add();
-            col.Field("TeamViceCaptain").HeaderText("Team Vice Captain").Width("100").Add();
+            col.Field("TeamWicketKeeper").HeaderText("Team Wicket Keeper").Width("150").Add();
+            col.Field("TeamViceCaptain").HeaderText("Team Vice Captain").Width("150").Add();
         })
+        .QueryCellInfo("queryCellInfo")
         .Render()
-   )
+)
 
 <script>
-    document.getElementById("createNewButton").addEventListener("click", function () {
-        window.location.href = '@Url.Action("TeamDetails", "TeamDetails")';
-    });
+    function queryCellInfo(args) {
+        // Check if the cell belongs to the "Team Players" column
+        if (args.column.headerText === "Team Players") {
+            const players = args.data.TeamPlayer;
+            const container = args.cell.querySelector('.team-players');
+            if (container && Array.isArray(players)) {
+                container.innerHTML = ''; // Clear any existing content
+                players.forEach(player => {
+                    const playerElement = document.createElement('span');
+                    playerElement.innerText = player;
+                    container.appendChild(playerElement);
+                    container.appendChild(document.createElement('br'));
+                });
+            }
+        }
+    }
 </script>

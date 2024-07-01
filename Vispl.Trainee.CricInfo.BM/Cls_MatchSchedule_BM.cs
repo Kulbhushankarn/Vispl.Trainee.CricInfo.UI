@@ -2,7 +2,7 @@
 using Vispl.Trainee.CricInfo.DL;
 using Vispl.Trainee.CricInfo.VO;
 
-namespace Vispl.Trainee.CricInfo.BL
+namespace Vispl.Trainee.CricInfo.BM
 {
     public class MatchScheduleBM
     {
@@ -37,6 +37,7 @@ namespace Vispl.Trainee.CricInfo.BL
         {
             return _matchScheduleDL.GetMatchDetails(matchId); 
         }
+
 
     }
 }

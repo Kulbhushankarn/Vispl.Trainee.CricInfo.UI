@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Web.Mvc;
-using Vispl.Trainee.CricInfo.BL;
+using Vispl.Trainee.CricInfo.BM;
 using Vispl.Trainee.CricInfo.VO;
 
 namespace Vispl.Trainee.CricInfo.UI.Controllers
@@ -45,7 +45,7 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
                 try
                 {
                     _matchScheduleBM.AddMatchSchedule(model);
-                    return RedirectToAction("Success");
+                    return RedirectToAction("DisplayMatchDataInGrid");
                 }
                 catch (Exception ex)
                 {

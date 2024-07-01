@@ -91,7 +91,7 @@ namespace Vispl.Trainee.CricInfo.DL
             using (SqlConnection cnn = new SqlConnection(_connectionString))
             {
                 cnn.Open();
-                string query = "SELECT t.TeamName, t.TeamShortName, p1.Name AS TeamCaptain, p2.Name AS TeamWicketKeeper, p3.Name AS TeamViceCaptain " +
+                string query = "SELECT t.TeamID, t.TeamName, t.TeamShortName, p1.Name AS TeamCaptain, p2.Name AS TeamWicketKeeper, p3.Name AS TeamViceCaptain " +
                                "FROM TeamCreate t " +
                                "JOIN Players p1 ON t.TeamCaptain = p1.PlayerID " +
                                "JOIN Players p2 ON t.TeamWicketKeeper = p2.PlayerID " +
@@ -104,13 +104,14 @@ namespace Vispl.Trainee.CricInfo.DL
                         {
                             Cls_TeamPlayer_VO team = new Cls_TeamPlayer_VO
                             {
+                                TeamID = Convert.ToInt64(reader["TeamID"]),
                                 TeamName = reader["TeamName"].ToString(),
                                 TeamShortName = reader["TeamShortName"].ToString(),
                                 TeamCaptain = reader["TeamCaptain"].ToString(),
                                 TeamWicketKeeper = reader["TeamWicketKeeper"].ToString(),
                                 TeamViceCaptain = reader["TeamViceCaptain"].ToString(),
-                                TeamPlayer = GetTeamPlayers(cnn, reader["TeamName"].ToString())
                             };
+                            team.TeamPlayer = GetTeamPlayersByTeamId(cnn, team.TeamID);
                             teams.Add(team);
                         }
                     }
@@ -118,6 +119,27 @@ namespace Vispl.Trainee.CricInfo.DL
             }
             return teams;
         }
+
+        private List<string> GetTeamPlayersByTeamId(SqlConnection cnn, long teamId)
+        {
+            List<string> players = new List<string>();
+            string query = "SELECT p.Name FROM TeamPlayers tp " +
+                           "JOIN Players p ON tp.PlayerID = p.PlayerID " +
+                           "WHERE tp.TeamID = @TeamID";
+            using (SqlCommand cmd = new SqlCommand(query, cnn))
+            {
+                cmd.Parameters.AddWithValue("@TeamID", teamId);
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        players.Add(reader["Name"].ToString());
+                    }
+                }
+            }
+            return players;
+        }
+
 
         private List<string> GetTeamPlayers(SqlConnection cnn, string teamName)
         {
