@@ -113,10 +113,10 @@ namespace Vispl.Trainee.CricInfo.UI.Controllers
 
             if (matchDetails == null)
             {
-                return HttpNotFound(); // Handle if match details are not found
+                return HttpNotFound(); 
             }
 
-            return View(matchDetails); // Assuming you have a view named StartMatch to display match details
+            return View(matchDetails); 
         }
 
 
