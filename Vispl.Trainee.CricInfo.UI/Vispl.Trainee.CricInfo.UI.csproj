@@ -198,6 +198,7 @@
     <Content Include="Content\FormCss\PlayerForm.css" />
     <Content Include="Content\Images\Computer login-amico.svg" />
     <Content Include="Content\Images\Computer login-rafiki.svg" />
+    <Content Include="Content\Images\_f826f165-74ce-4802-bf4d-8b1954e8e28e.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

@@ -85,6 +85,7 @@ namespace Vispl.Trainee.CricInfo.DL
             }
         }
 
+
         public List<Cls_TeamPlayer_VO> GetAllTeams()
         {
             List<Cls_TeamPlayer_VO> teams = new List<Cls_TeamPlayer_VO>();
@@ -129,7 +130,7 @@ namespace Vispl.Trainee.CricInfo.DL
             using (SqlCommand cmd = new SqlCommand(query, cnn))
             {
                 cmd.Parameters.AddWithValue("@TeamID", teamId);
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())  
                 {
                     while (reader.Read())
                     {
@@ -140,7 +141,7 @@ namespace Vispl.Trainee.CricInfo.DL
             return players;
         }
 
-
+        
         private List<string> GetTeamPlayers(SqlConnection cnn, string teamName)
         {
             List<string> players = new List<string>();
@@ -190,6 +191,8 @@ namespace Vispl.Trainee.CricInfo.DL
                 {
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
+
+                        
                         while (reader.Read())
                         {
                             playerNames.Add(reader["Name"].ToString());

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Vispl.Trainee.CricInfo.VO
 {
@@ -15,5 +16,7 @@ namespace Vispl.Trainee.CricInfo.VO
         public string Team1Name { get; set; }
         public string Team2Name { get; set; }
         public string VenueName { get; set; }
+        public List<string> Team1Players { get; set; }
+        public List<string> Team2Players { get; set; }
     }
 }

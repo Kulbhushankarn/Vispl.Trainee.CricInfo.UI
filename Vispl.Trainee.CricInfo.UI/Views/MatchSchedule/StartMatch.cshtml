@@ -5,15 +5,100 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        text-align: center;
+        color: #4CAF50;
+    }
+
+    .container {
+
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    .teams {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .teams p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .teams span {
+            display: inline-block;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #555;
+        }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        form div {
+            margin: 10px 0;
+        }
+
+        form label {
+            font-size: 16px;
+            color: #555;
+        }
+
+        form input[type="radio"] {
+            margin-right: 10px;
+        }
+
+    button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+    #tossResult, #matchStart {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    #decisionForm {
+        display: none;
+    }
+</style>
+
 <h2>Start Match</h2>
 
-@if (Model != null)
-{
-    <div>
-        <h3>Teams</h3>
-        <p>Team 1: @Model.Team1Name</p>
-        <span>VS</span>
-        <p>Team 2: @Model.Team2Name</p>
+<div class="container">
+    @if (Model != null)
+    {
+        <div class="teams">
+            <h3>Teams</h3>
+            <p>Team 1: @Model.Team1Name</p>
+            <span>VS</span>
+            <p>Team 2: @Model.Team2Name</p>
+        </div>
 
         <form id="tossForm">
             <div>
@@ -38,21 +123,63 @@
             </div>
             <button type="button" onclick="submitToss()">Submit Toss</button>
         </form>
-        <div id="tossResult"></div>
-    </div>
-}
 
-else
-{
-    <p>Match details not found.</p>
-}
+        <div id="tossResult"></div>
+
+        <div id="decisionForm">
+            <h3>Please choose your decision</h3>
+            <div>
+                <label>
+                    <input type="radio" name="decision" value="bat" /> Bat
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="decision" value="bowl" /> Bowl
+                </label>
+            </div>
+            <button type="button" onclick="submitDecision()">Submit Decision</button>
+        </div>
+
+        <div id="matchStart"></div>
+    }
+    else
+    {
+        <p>Match details not found.</p>
+    }
+</div>
 
 <script>
     function submitToss() {
-        let tossResult = Math.random() < 0.5 ? 'heads' : 'tails';
-        let selectedTeam = document.querySelector('input[name="team"]:checked').value;
-        let teamName = selectedTeam === 'team1' ? '@Model.Team1Name' : '@Model.Team2Name';
+        let selectedToss = document.querySelector('input[name="toss"]:checked');
+        let selectedTeam = document.querySelector('input[name="team"]:checked');
 
-        document.getElementById('tossResult').innerHTML = "The toss result is: " + tossResult + ". " + teamName + " wins the toss.";
+        if (!selectedToss || !selectedTeam) {
+            document.getElementById('tossResult').innerHTML = "Please select both toss and team.";
+            return;
+        }
+
+        let tossResult = Math.random() < 0.5 ? 'heads' : 'tails';
+        let teamName = selectedTeam.value === 'team1' ? '@Model.Team1Name' : '@Model.Team2Name';
+
+        if (selectedToss.value === tossResult) {
+            document.getElementById('tossResult').innerHTML = "The toss result is: " + tossResult + ". " + teamName + " wins the toss.";
+            document.getElementById('decisionForm').style.display = "block";
+        } else {
+            let otherTeam = selectedTeam.value === 'team1' ? '@Model.Team2Name' : '@Model.Team1Name';
+            document.getElementById('tossResult').innerHTML = "The toss result is: " + tossResult + ". " + otherTeam + " wins the toss.";
+            document.getElementById('decisionForm').style.display = "block";
+        }
+    }
+
+    function submitDecision() {
+        let selectedDecision = document.querySelector('input[name="decision"]:checked');
+        if (!selectedDecision) {
+            document.getElementById('matchStart').innerHTML = "Please choose a decision.";
+            return;
+        }
+
+        let decisionText = selectedDecision.value === 'bat' ? 'batting' : 'bowling';
+        document.getElementById('matchStart').innerHTML = "The team has chosen " + decisionText + ". The match is starting now!";
     }
 </script>

@@ -12,11 +12,15 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
+            <a class="navbar-brand" href="@Url.Action("Dashboard", "Dashboard")">
+                <img src="~/Content/Images/_f826f165-74ce-4802-bf4d-8b1954e8e28e.jpg" alt="Logo" style="width: 44px; height: 44px;" />
+            </a>
             @Html.ActionLink("CricInfo", "Dashboard", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Dashboard", "Dashboard", "Dashboard", new { area = "" }, new { @class = "nav-link" })</li>
